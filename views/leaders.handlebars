@@ -1,0 +1,222 @@
+
+{{#if user}}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+
+<link href="/css/simplePagination.css" rel="stylesheet" />
+<script src="/js/pagination.min.js"></script>
+
+<style>
+   .leadersList{
+        width:100%;
+        box-shadow: 0px 1px 3px hsla(0, 0%, 21%, 0.75);
+        padding: 15px;
+         margin-bottom: 20px;
+         background: #d7e2d3;
+   } 
+   .leadersList img{
+       width: 50px;
+       margin-bottom: 15px;
+   }
+   .leadersList h5{
+        font-size: 16px;
+        margin-bottom: 5px;
+   }
+   .leadersList p{
+        color: #504e4e;
+        font-size: 13px;
+            word-break: break-word;
+   }
+   .leadersList .headerSec{
+        border-bottom: 1px solid #ece6e6;
+        margin-bottom: 10px;
+        margin-top: 10px;
+        padding-bottom: 10px;
+   }
+    .leadersList .headerSec p span{
+        float: right;
+    }
+    .leadersList .headerSec p span img{
+        width: 30px;
+        border: 1px solid;
+        border-radius: 50%;
+        padding: 4px;
+    }
+    .leadersList p span{
+        float: right;
+    }
+.pagination {
+    display: inline-block;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+</style>
+
+<div class="container " style="margin-top:100px; margin-bottom:20px;">
+ <form role="form" action="/users/polytical-leaders" id="recordsearch" method="POST">  
+ {{#if message}}
+    <div class="alert alert-danger">{{message}}</div>
+   {{/if}}
+
+
+    <div class="row">
+                <div class="col-md-4 col-12" style="margin-bottom:2%">
+            <label><p> Select Records</p> </label>
+           <select id="selectrecord" style="width:100%;text-align:left;" name="selectrecord">
+               {{#each Recordset}}
+                   <option value="{{this}}">{{this}} Records</option>
+                 {{/each}}
+               
+            </select>
+                       
+        </div>
+       
+    </div>
+    <div class="row" id="Inldleader">     
+    </div>  
+<div class="row">
+    <div class="col-md-12 col-12">  
+            <div id="pagination" class="pagination" style="float:right">     
+            </div>
+    </div>
+</div>
+
+</form>
+</div>
+{{/if}}
+
+<script>
+    var pageno=1;
+    var rec=1;
+    
+   $(function() {
+    LeaderList(rec,pageno)
+   });
+
+$('#selectrecord').on('select2:select', function (e) {
+        var data = e.params.data;
+         rec=data.id;
+        LeaderList(rec,pageno);    
+        e.preventDefault();
+});
+
+function LeaderList(rec,pageno){
+alert(pageno);
+  $.post("/users/polytical-leaders", { Record: rec,page:pageno},function(data, status){
+             var html='';
+             $('#Inldleader').html('');
+            $.map(data.LeaderList, function(val, i ) {
+              
+                if(val.Party=='INLD'){
+                    html='<p><span><img src="/img/logo.png" /></span></p>';
+                }else if(val.Party=='BJP'){
+                     html='<p><span><img src="/img/bjp.jpg" /></span></p>';
+                }
+                else if(val.Party=='BSP'){
+                     html='<p><span><img src="/img/bsp.png" /></span></p>';
+                }
+                 else if(val.Party=='congress'){
+                     html='<p><span><img src="/img/congress.png" /></span></p>';
+                }else{
+                       html='<p><span><img src="/img/logo.png" /></span></p>';
+                }
+                 $('#Inldleader').append(
+            '<div class="col-md-4">'+
+                        '<div class="leadersList">'+
+                            '<div class="headerSec">'+
+                                '<div class="row">'+
+                                    '<div class="col-md-3 col-4 text-center">'+
+                                        '<img alt="" src="/uploads/'+val.Profileimg+'" class="center-block img-responsive">'+
+                                   ' </div>'+
+                                    '<div class="col-md-9 col-8">'+
+                                        '<div class="row">'+
+                                            '<div class="col-md-8 col-8">'+
+                                                
+                                                '<h5>'+val.Name+'</h5>'+
+                                                '<p>'+val.CDesignation+'</p>'+
+                                            '</div>'+
+                                           
+                                            '<div class="col-md-4 col-4">'+html+
+                                              
+                                        '</div>'+                  
+                                        '</div>'+
+                                    '</div>'+
+                                '</div> '+
+                            '</div>'+
+                            '<div class="row">'+
+                                    '<div class="col-md-4 col-5">'+
+                                        '<p>Email ID <span>:</span></p>'+
+                                    '</div>'+
+                                    '<div class="col-md-8 col-7">'+
+                                        '<p>'+val.Email+'</p>'+
+                                    '</div> '+                                 
+                           '</div>'+
+                            '<div class="row">'+
+                                    '<div class="col-md-4 col-5">'+
+                                        '<p>Mobile No. <span>:</span></p>'+
+                                    '</div>'+
+                                    '<div class="col-md-8 col-7">'+
+                                        '<p>'+val.MobileNo+'</p>'+
+                                    '</div> '+                              
+                            '</div>'+
+                            '<div class="row">'+
+                                    '<div class="col-md-4 col-5">'+
+                                        '<p>Constituency<span >:</span></p>'+
+                                    '</div>'+
+                                    '<div class="col-md-8 col-7">'+
+                                        '<p>'+val.Constituency+'- Haryana</p>'+
+                                    '</div>    '+                           
+                            '</div>'+
+                            '<div class="row">'+
+                                    '<div class="col-md-12 text-center">'+
+                                        '<button class="btn btn-success"> View Details</button>'+
+                                    '</div> '+                                        
+                            '</div>'+
+                        '</div>'+                       
+                   ' </div>'
+
+
+                 )
+            });
+               // pages=data.pages;
+             $("#pagination").pagination({
+                    pages:data.pages,
+                    currentPage:pageno,
+                    selectOnClick:false,
+                    displayedPages: 5, 
+                    hrefTextPrefix: ' ', 
+                    //hrefTextSuffix: '', 
+                      onPageClick : function(page){    
+                         // alert(page);
+                          //page=page;
+                         LeaderList(rec,page);
+                     }
+                 
+                });
+
+       });
+}
+
+
+
+
+    $('#selectrecord').select2({
+       placeholder: 'Select an option'
+    });
+
+   
+</script>

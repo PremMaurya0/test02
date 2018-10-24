@@ -1,0 +1,84 @@
+ <link rel="stylesheet" href="/css/login.css" /> 
+ <style>
+     .alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    padding: 3% !important;
+    margin-bottom: 4%!important;
+}
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    padding: 3%;
+    margin-bottom: 4%;
+}
+ </style>
+
+        <div class="panda">   
+            <div class="ear"></div>
+            <div class="face">
+                <div class="eye-shade"></div>
+                <div class="eye-white">
+                <div class="eye-ball"></div>
+                </div>
+                <div class="eye-shade rgt"></div>
+                <div class="eye-white rgt">
+                <div class="eye-ball"></div>
+                </div>
+                <div class="nose"></div>
+                <div class="mouth"></div>
+            </div>
+            <div class="body"> </div>
+            <div class="foot">
+                <div class="finger"></div>
+            </div>
+            <div class="foot rgt">
+                <div class="finger"></div>
+            </div>
+            </div>
+            <form  method="post" action="/users/login">
+            <div class="hand"></div>
+            <div class="hand rgt"></div>
+            <h1 id="tagname">INLD User Login</h1>
+         {{#if error}}
+         <p class="alert-danger">{{error}}</p>
+          
+           {{/if}}
+
+           {{#if success_msg}}
+            <div class="alert-success">{{success_msg}}</div>
+          
+          {{/if}}
+
+          {{#if error_msg}}
+            <div class="alert-danger">{{error_msg}}</div>
+           
+          {{/if}}
+   
+
+            <div class="form-group">
+                <input type="text" autocomplete="off"  name="username"  class="form-control"/>
+                <label class="form-label">Username    </label>
+            </div>
+            <div class="form-group">
+                <input id="password" type="password"  name="password" class="form-control"/>
+                <label class="form-label">Password</label>
+                <p class="alert">Invalid Credentials..!!</p>
+                <button type="submit" class="btn">Login </button>
+                 
+            </div>
+            <a href="/users/forget"><span class="fa fa-google-plus"></span> Forgot Password</a>
+            </form>
+         </div>
+     <script crossorigin="anonymous" src="/js/loginform.js"></script>
+     <script>
+         $(document).ready(function(){
+             setTimeout(function(){
+                 $(".alert-success").hide();
+                  $(".alert-danger").hide();
+             },3000);
+            
+         });
+     </script>

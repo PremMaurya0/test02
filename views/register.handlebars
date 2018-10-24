@@ -1,0 +1,718 @@
+
+{{#if user}}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<style>
+    form {
+  margin:auto;
+  width: 100%;
+  padding: 60px 13px 80px 13px;
+  text-align: center;
+  -webkit-box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+  box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+}
+label {
+  display: block;
+  position: relative;
+  margin: 40px 0px;
+}
+input {
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.line-box {
+  position: relative;
+  width: 100%;
+  height: 2px;
+  background: #BCBCBC;
+}
+
+.line {
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #8BC34A;
+  transition: ease .6s;
+}
+
+input:focus + .line-box .line {
+  width: 100%;
+}
+
+.label-txt {
+  position: absolute;
+  top: -1.6em;
+  padding: 10px;
+  font-family: sans-serif;
+  font-size: .8em;
+  letter-spacing: 1px;
+  color: rgb(120,120,120);
+  transition: ease .3s;
+}
+
+.label-active {
+  top: -3em;
+}
+
+button {
+  display: inline-block;
+  padding: 12px 24px;
+  background: rgb(220,220,220);
+  font-weight: bold;
+  color: rgb(120,120,120);
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: ease .3s;
+}
+
+button:hover {
+  background: #8BC34A;
+  color: #ffffff;
+}
+/*radio button css*/
+.radio_button_box{
+    margin-top: 0px;
+}
+.radio_button_box .input-hidden {
+    position: absolute;
+    left: -9999px;
+  }
+  
+.radio_button_box input[type=radio]:checked + label>img {
+    border: 1px solid #fff;
+    box-shadow: 0 0 3px 3px #090;
+  }
+
+.radio_button_box input[type=radio] + label  {
+    box-shadow: 0px 3px 32px hsla(0, 0%, 79%, 0.3607843137);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    padding: 1px;
+    opacity: .5
+}
+.radio_button_box input[type=radio]:checked + label{
+    opacity: 1;
+}
+  
+  /* Stuff after this is only to make things more pretty */
+.radio_button_box input[type=radio] + label>img {
+    border: 5px Solid #464444;
+    width: 80px;
+    height: 80px;
+    transition: 500ms all;
+    border-radius: 50%;
+    padding: 15px;
+    margin: 10px auto 20px;
+    box-shadow: 0px 3px 32px hsla(0, 0%, 79%, 0.3607843137);
+  }
+  
+.radio_button_box input[type=radio]:checked + label>img {
+    transform: 
+      rotateZ(-10deg) 
+      rotateX(10deg);
+}
+.radio_button_box input[type=radio]:checked + label .label_head{
+    color: #039347;
+    font-weight: 600;
+    letter-spacing: 1.1px;
+    font-size: 13px;
+}
+.alert-info {
+    color: #0c5460;
+    background-color: #f5f4f4;
+    
+}
+.alert {
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    /* border-radius: 0.25rem; */
+}
+.select2-container--default .select2-selection--single{
+    text-align: left;
+}
+.col-sm-12{
+width: auto !important;
+}
+.col-sm-6{
+width: auto !important;
+padding-right: 0;
+}
+
+.bg_white{
+    background: #ffffff;
+}
+.profileImgBox{
+    
+    margin: auto;
+   
+}
+.profileImgBox img{
+    width: 50%;
+    height: 50%;
+    border-radius: 50%;
+}
+.profile_img_sec .form-body {
+    padding: 15px;
+}
+.profile_img_sec .form-body .upProfile_sec{
+    padding: 20px 20px 10px;;
+    background: #f4f4f4;
+    margin-bottom: 10px;
+}
+.profile_img_sec .form-body .upProfile_sec label{
+    margin-bottom: 30px;
+}
+.up_img_pro{
+    width: 100%;
+    margin-top: 20px;
+}
+.up_img_pro img{
+   width: 50px;
+    float: right;
+    margin-right: 19px;
+        margin-top: -84px;
+}
+.profile_img_sec .form-body .upProfile_sec .headingH4{
+    margin-top: 0px !important;
+}
+.vehicle_listing .widget_img_box{
+    padding: 15px;
+    border: 5px solid #565454;
+}
+.headingH4{
+ 
+    border-bottom: 1px solid #e4e2e2;
+    padding-bottom: 10px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    width: 100%;
+    color: #000000;
+}
+/*image upload */
+
+
+.uploadProfile {
+    /* opacity: 0; */
+    width: 90px;
+    height: 100%;
+    /* background: rgba(233, 238, 242, 0.53); */
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 4px !important;
+}
+/* .chProfileDiv img:hover .uploadProfile{
+    opacity: 1;
+} */
+
+.
+.btn-uploadnew {
+    background: none !important;
+    /* color: #ffffff !important;
+    border-radius: 20px !important;
+    font-size: 18px;
+    font-weight: bold; */
+
+    width: 100%;
+    margin: auto;
+    height: 100%;
+    position: relative;
+
+    /* padding-top: 45%;
+    padding-left: 30%;
+    padding-right: 33%;
+    padding-bottom: 47%; */
+}
+
+.btn-uploadnew .fileinput-new{
+    position: absolute;
+    bottom: 0px;
+    text-align: center;
+    display: inline-block;
+    width: -webkit-fill-available;
+    left: 0;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top:-53px;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 10px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+.closeButton {
+    position: absolute;
+    right: -22px;
+    top: -22px;
+    border-radius: 50% !important;
+    width: 33px;
+    height: 33px;
+    border: 3px solid #ffffff;
+    z-index: 999;
+    background: #ffffff;
+}
+.closeButton .close {
+    background: none !important;
+    font-size: 16px !important;
+    opacity: 1 !important;
+    margin-top: 6px !important;
+    margin-right: 8px !important;
+    position: absolute;
+    left: 5px;
+    text-indent: 0;
+}
+.closeButton .close i {
+    color: rgba(0, 0, 0, 0.62) !important;
+    opacity: 1;
+    position: absolute;
+    left: 1px;
+}
+
+.docMainBox{
+    width: 100%;
+    margin: 10px 0px 20px;
+    height: 100%;
+    overflow: hidden; 
+    /* width: 190px;
+    height:190px;
+    margin: 20px auto; */
+    position: relative;
+   
+}
+
+.adBox{
+    margin-bottom: 30px;
+    margin-top: 20px;
+    display: block;
+    box-shadow: 0px 3px 32px hsla(0, 0%, 79%, 0.3607843137);
+    padding: 20px;
+}
+.page-container-bg-solid .page-title {
+    color: #000;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: .4px;
+}
+.profile_img_sec{
+    padding: 0px 0px !important;
+}
+.upProfile_sec{
+    width: 100%;
+    background: #fbfbfb;
+    display: block;
+    text-align: center;
+}
+.upProfile_sec .out_sec{
+    width: 320px;
+    margin: auto;
+    display: block;
+
+}
+.upProfile_sec label{
+    color: black;
+    font-weight: 600;
+    font-size: 22px;
+}
+
+.fileUploadMain input[type='file']{
+    opacity: 0;
+}
+.fileUploadMain .file_upload_div{
+    width: 100%;
+    float: left;
+    /* border-bottom: 1px solid #ccc; */
+}
+.fileUploadMain .file_upload_div .btn_file{
+    width: 40%;
+    float: left;
+    background: #403f3f;
+    color: #fff;
+    padding: 5px;
+    border-radius: 4px !important;
+    text-align: center;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+.fileUploadMain .file_upload_div input[type='text']{
+    border: none;
+    padding: 5px;
+    background: transparent;
+    outline: none;
+    width: 55%;
+    float: left;
+}
+.pic .col-md-12{
+    padding-right: 0px !important; 
+    padding-left: 0px !important; 
+}
+
+.a label{
+margin-top: 10px !important;
+}
+.card-body{
+    padding: 0px; 
+}
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    padding: 2%;
+}
+</style>
+    
+     
+
+
+
+<form method="POST" action="/users/register" enctype="multipart/form-data">
+<div class="container" style="margin-top: 2%; margin-bottom:5%">
+     <div class="row ">
+            <div class="col-md-4 py-5 bg-primary text-white text-center ">
+                <div class=" ">
+                    <div class="card-body">
+                        <img src="http://www.ansonika.com/mavia/img/registration_bg.svg" style="width:30%">
+                  
+<h5 style="color:#000">Upload Profile</h5>
+ <div class="pic content-box-main profile_img_sec row">
+                                <div class="form-body w-100">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="upProfile_sec">
+                                                <div class="form-group form-md-line-input">
+                                                    {{!-- <h4 class="headingH4">Upload Profile Pic</h4> --}}
+                                                    <div class="profileImgBox">
+                                                        <img alt="" id="profile_copy" src="/img/defaultIcon.png" class="center-block userImg img-responsive">
+                                                    </div>
+                                                </div>    
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">           
+                                        <div class="col-md-12">
+                                            <div class="up_img_pro">
+                                                <img alt="" id="profile_copy" src="/img/upload-icon.png" class="center-block userImg img-responsive">
+                                                <div class="uploadProfile">
+                                                    <div class="btn default btn-file btn-uploadnew">
+                                                    <input type="file" name="myImage" onchange="getpic('profile_pic_copy','profile_copy','dl_text',event),OpenFile('profile_pic_copy')" class="form-control imgPrv" id="profile_pic_copy">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>    
+                            </div>
+
+
+                        <div class="radio_button_box">
+                            <div class="row gende" style="margin-top:-35px !important">
+                                <div class="col-md-6 col-sm-12">
+                                    <input type="radio" name="gender" checked="checked" value="m" id="male" class="input-hidden">
+                                        <label for="male" style="float:right;">
+                                            <img src="/img/man.png" alt="male" class="img-responsive">
+                                            <div class="label_head text-center"> Male </div>
+                                        </label>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                <input type="radio" name="gender" id="Female" value="f" class="input-hidden">
+                                        <label for="Female">
+                                            <img src="/img/girl.png" alt="Female" class="img-responsive">
+                                            <div class="label_head text-center"> Female </div>
+                                        </label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                           
+                      
+
+
+<div class="clear-fix"></div>
+<hr/>
+                <div class="a">
+                        <label>
+                            <p style="text-align:left;color:#000">Select Religion</p>
+                        <select id="religion" class="input" name="constituency" style="width:100%;text-align:left;">
+                            <option value="JAN">January</option>
+                            <option value="FEB">February</option>
+                            <option value="MAR">March</option>
+                            <option value="APR">April</option>
+                            <option value="MAY">May</option>
+                            <option value="JUN">June</option>
+                            <option value="JUL">July</option>
+                            <option value="AUG">August</option>
+                            <option value="SEP">September</option>
+                            <option value="OCT">October</option>
+                            <option value="NOV">November</option>
+                            <option value="DEC">December</option>
+                        </select>
+                            </label>
+                    </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 py-5"  style="margin-top: -47px;">
+      
+      
+         {{#if error}}
+            <div class="alert-danger">{{error}}</div>
+          {{/if}}
+
+
+<div class="row">
+<div class="col-md-12">
+
+        <div class="alert alert-info">
+            <div class="form">
+                <label class="control-label" style="margin-top: -10px;">
+                    What is your Political Party?</label>
+                <div class="radio_button_box">
+                    <div class="row"  style="margin-top: -60px;">
+
+                        <div class="col-md-3 col-sm-6">
+                            <input type="radio" name="party" value="INLD" checked="checked" id="INLD" class="input-hidden">
+                                <label for="INLD">
+                                    <img src="/img/logo.png" alt="INLD" class="img-responsive">
+                                    <div class="label_head text-center"> INLD </div>
+                                </label>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                        <input type="radio" name="party" id="BJP" value="BJP" class="input-hidden">
+                                <label for="BJP">
+                                    <img src="/img/bjp.jpg" alt="BJP" class="img-responsive">
+                                    <div class="label_head text-center"> BJP </div>
+                                </label>
+                        </div>
+
+                        <div class="col-md-3 col-sm-6">
+                        <input type="radio" name="party" id="BSP" value="BSP" class="input-hidden">
+                                <label for="BSP">
+                                    <img src="/img/bsp.png" alt="BSP " class="img-responsive">
+                                    <div class="label_head text-center"> BSP </div>
+                                </label>
+                        </div>
+
+                    <div class="col-md-3 col-sm-6">
+                            <input type="radio" name="party"  id="Con" value="congress" class="input-hidden">
+                                <label for="Con">
+                                    <img src="/img/congress.png" alt="Divorced" class="img-responsive">
+                                    <div class="label_head text-center"> Congress  </div>
+                                </label>
+                        </div>
+                    </div>
+                </div>
+               
+        </div>
+       </div>
+
+  
+    <label>
+    <p class="label-txt">Enter Name</p>
+    <input type="text" class="input" value="{{userDetails.Name}}" name="name">
+    <div class="line-box">
+      <div class="line"></div>
+    </div>
+  </label>
+
+  <label>
+    <p class="label-txt">Enter Email</p>
+    <input type="email" class="input" value="{{userDetails.Email}}" name="email">
+    <div class="line-box">
+      <div class="line"></div>
+    </div>
+  </label>
+  
+  <label>
+    <p class="label-txt">Enter Mobile No</p>
+    <input type="text" class="input" value="{{userDetails.MobileNo}}" name="mobile">
+    <div class="line-box">
+      <div class="line"></div>
+    </div>
+  </label>
+
+    <div class="alert alert-info">
+            <div class="form">
+                <label class="control-label">
+                    What is your Marital Status?</label>
+                <div class="radio_button_box">
+                    <div class="row"  style="margin-top: -50px;">
+
+                        <div class="col-md-3 col-sm-6">
+                            <input type="radio" name="mstatus" checked="checked" value="married" id="Married" class="input-hidden">
+                                <label for="Married">
+                                    <img src="/img/m.png" alt="Married" class="img-responsive">
+                                    <div class="label_head text-center"> Married </div>
+                                </label>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                        <input type="radio" name="mstatus" id="single" value="single" class="input-hidden">
+                                <label for="single">
+                                    <img src="/img/girl.png" alt="single" class="img-responsive">
+                                    <div class="label_head text-center"> Single </div>
+                                </label>
+                        </div>
+
+                        <div class="col-md-3 col-sm-6">
+                        <input type="radio" name="mstatus" id="Widowed" value="widowed" class="input-hidden">
+                                <label for="Widowed">
+                                    <img src="/img/w.png" alt="Divorced " class="img-responsive">
+                                    <div class="label_head text-center"> Widowed </div>
+                                </label>
+                        </div>
+
+                    <div class="col-md-3 col-sm-6">
+                            <input type="radio" name="mstatus"  id="Divorced" value="divorced" class="input-hidden">
+                                <label for="Divorced ">
+                                    <img src="/img/d.png" alt="Divorced" class="img-responsive">
+                                    <div class="label_head text-center"> Divorced  </div>
+                                </label>
+                        </div>
+                    </div>
+                </div>
+               
+        </div>
+       </div>
+<label>
+    <p class="label-txt">Enter Qualification</p>
+    <input type="text" class="input" value="{{userDetails.Qulification}}" name="qulification">
+    <div class="line-box">
+      <div class="line"></div>
+    </div>
+  </label>
+      <div class="alert alert-info">
+            <div class="form">
+              <p >Degignation Details</p>
+                <div class="radio_button_box">
+                    <div class="row"  style="margin-top: -30px;">
+
+                        <div class="col-md-6 col-sm-12">
+                           <label>
+                            <p class="label-txt">Current Designation</p>
+                            <input type="text" class="input" value="{{userDetails.CDesignation}}" name="cdesignation">
+                            <div class="line-box">
+                            <div class="line"></div>
+                            </div>
+                            </label>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                         <label>
+                            <p class="label-txt">Current Year</p>
+                            <input type="number" class="input" value="{{userDetails.CYear}}" name="cdyear">
+                            <div class="line-box">
+                            <div class="line"></div>
+                            </div>
+                        </label>
+                        </div>      
+                    </div>
+                </div>             
+        </div>
+       </div>
+   
+     <div class="alert alert-info">
+            <div class="form">
+               
+                <div class="radio_button_box">
+                    <div class="row"  style="margin-top: -60px;">
+
+                        <div class="col-md-6 col-sm-12">
+                           <label>
+                                <p class="label-txt">Previous Designation</p>
+                                <input type="text" class="input" value="{{userDetails.Pdesignation}}" name="Pdesignation">
+                                <div class="line-box">
+                                <div class="line"></div>
+                                </div>
+                         </label>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                         <label>
+                            <p class="label-txt">Previous Year</p>
+                            <input type="number" class="input" value="{{userDetails.PYear}}" name="pyear">
+                            <div class="line-box">
+                            <div class="line"></div>
+                            </div>
+                         </label>
+                        </div>                   
+                    </div>
+                </div>              
+        </div>
+       </div>
+          <button type="submit">submit</button>
+    </div>
+</div>
+
+</div>
+</div>
+
+</div>
+
+</form>
+<script>
+$(document).ready(function(){
+     setTimeout(function(){
+                 //$(".alert-success").hide();
+                  $(".alert-danger").hide();
+             },5000);
+
+   $('#example').select2({
+    placeholder: 'Select a month'
+});
+$('#religion').select2({
+    placeholder: 'Select a month'
+});
+  $('#marital').select2({
+    placeholder: 'Select a month'
+});
+  $('input').focus(function(){
+    $(this).parent().find(".label-txt").addClass('label-active');
+  });
+
+  $("input").focusout(function(){
+    if ($(this).val() == '') {
+      $(this).parent().find(".label-txt").removeClass('label-active');
+    };
+  });
+ 
+          
+});
+function getpic(fileid,id,id2,event){
+    var file = $("#"+fileid)[0].files[0]
+    if (file){
+ 
+    $('#'+id2).val(file.name);
+
+    var reader = new FileReader();
+
+    reader.onload = function(){
+        var output = document.getElementById(id);
+        output.src = reader.result;
+    }
+    reader.readAsDataURL(event.target.files[0]);
+}
+}
+
+</script>
+{{/if}}
